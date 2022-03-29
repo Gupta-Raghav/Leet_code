@@ -7,16 +7,9 @@ public:
         int max_profit = 0;
         
         for(int i=n-1;i>=0;i--){
-            if(msf<prices[i]){
-                msf = prices[i];
-            }
-            if(msf-prices[i]>0)
-                arr[i]=msf-prices[i];
-            if(msf-prices[i]==0){
-                arr[i]=0;
-            }
-            if(max_profit < arr[i])
-                max_profit = arr[i];
+            msf = max(prices[i],msf);
+            arr[i]=msf-prices[i];
+            max_profit = max(max_profit,arr[i]);
         }
         return max_profit;
     }
