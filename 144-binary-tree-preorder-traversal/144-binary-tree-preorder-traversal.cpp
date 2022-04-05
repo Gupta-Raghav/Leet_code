@@ -22,10 +22,10 @@ public:
            TreeNode* topNode = st.top();
             preorder.push_back(topNode->val);
             st.pop();
-            if(topNode -> right != NULL)
+           if(topNode -> right != NULL)
                 st.push(topNode->right);
-            if(topNode -> left != NULL)
-                st.push(topNode->left);
+             if(topNode -> left != NULL)
+                st.push(topNode->left); 
             }
         return preorder;
        }
