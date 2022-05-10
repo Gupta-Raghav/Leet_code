@@ -13,20 +13,23 @@ class Solution {
 public:
     vector<int> preorderTraversal(TreeNode* root) {
        vector<int> preorder;
-       stack<TreeNode* > st;
-        if(root == NULL)
+        stack<TreeNode*> st;
+        if(root==NULL){
             return preorder;
+        }
         st.push(root);
-
-       while(!st.empty()){ 
-           TreeNode* topNode = st.top();
-            preorder.push_back(topNode->val);
+        while(!st.empty()){
+            
+            root = st.top();
             st.pop();
-           if(topNode -> right != NULL)
-                st.push(topNode->right);
-             if(topNode -> left != NULL)
-                st.push(topNode->left); 
+            preorder.push_back(root->val);
+            if(root->right!=NULL){
+                st.push(root->right);
             }
+            if(root->left!=NULL){
+                st.push(root->left);
+            }
+        }
         return preorder;
        }
 };
