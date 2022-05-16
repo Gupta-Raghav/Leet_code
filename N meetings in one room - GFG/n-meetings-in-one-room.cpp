@@ -7,28 +7,23 @@ class Solution
 {
     public:
     //Function to find the maximum number of meetings that can
-    //be performed in a meeting room.
-    int sortend(int start[],int end,int n){
-        int pivot = ((n+0)-1)/2;
-    }
+ 
     int maxMeetings(int start[], int end[], int n)
     {
-        vector<pair<int,int>> v;
-        int count=1;
-        
-        for(int i=0;i<n;i++){
-            v.push_back(make_pair(end[i],start[i]));
-        }
-        
-        sort(v.begin(),v.end()); //sorted the array on the basis of end time
-        int k=0;
-        for(int i=1;i<n;i++){
-            if(v[k].first<v[i].second){
-                k=i;
-                count++;
-            }
-        }
-        return count;
+       vector<pair<int,int>> meetings;
+       for(int i=0;i<n;i++){
+           meetings.push_back(make_pair(end[i],start[i]));
+       }
+       sort(meetings.begin(),meetings.end());
+       int k=0;
+       int count =1;
+       for(int i=0;i<n;i++){
+           if(meetings[k].first<meetings[i].second){
+               count++;
+               k=i;
+           }
+       }
+       return count;
     }
 };
 
