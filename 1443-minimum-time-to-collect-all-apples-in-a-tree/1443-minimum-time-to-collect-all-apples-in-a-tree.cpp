@@ -1,23 +1,22 @@
 class Solution {
 public:
-    vector<vector<int>> adjList;
-    int dfs(vector<bool>& hasApple,int node,int d,int prev)
-    {
-        int result=0,temp;
-        for(int &i:adjList[node])
-	    if(i!=prev)
-	    {
-	        temp=dfs(hasApple,i,d+1,node);
-	        if(temp) result+=temp-d;
-	    }
-        return result||hasApple[node]?result+d:0; 
-        
+    int dfs(int n, int parent, vector<vector<int>> &adj,  vector<bool> &hasApple ){
+        int tTime = 0, cTime = 0;
+        for(auto child: adj[n]){
+            if(child == parent) continue;
+            cTime = dfs(child, n, adj,hasApple);
+            
+            if(cTime || hasApple[child]) tTime += cTime +2;
+        }
+        return tTime; 
     }
-    int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) 
-    {
-        adjList.resize(n);
-        for(vector<int> &e:edges)
-            adjList[e[0]].push_back(e[1]),adjList[e[1]].push_back(e[0]);
-        return dfs(hasApple,0,0,-1)*2;
+    
+    int minTime(int n, vector<vector<int>>& edges, vector<bool>& hasApple) {
+        vector<vector<int>> adj(n);
+        for(auto &edge: edges){
+            adj[edge[0]].push_back(edge[1]);
+            adj[edge[1]].push_back(edge[0]);
+        }
+         return dfs(0,-1,adj,hasApple);
     }
 };
